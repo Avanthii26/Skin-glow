@@ -1,0 +1,103 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Skin Glow</title>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; }
+        body {
+            padding-top: 80px;
+            background-image: url('skin.jpg'); 
+            background-size: cover;        
+            background-position: center;   
+            background-repeat: no-repeat;   
+            background-attachment: fixed;  
+            text-align: center;
+        }
+        marquee {
+            position: fixed; top:0; left:0; width:100%;
+            background-color: black; color:white; font-size:20px; padding:10px; z-index:1000;
+        }
+        .form-wrapper {
+            width: 90%; max-width: 400px; margin: 120px auto; padding: 20px;
+            background-color: rgba(255,255,255,0.9); border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+        h2 { margin-bottom: 20px; color:#333; }
+        label { display:block; text-align:left; font-weight:bold; margin:10px 0 5px; color:#444; }
+        input { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-size:14px; }
+        button { width:100%; padding:12px; background-color:#000; color:white; border:none; cursor:pointer; font-size:16px; border-radius:6px; transition:0.3s ease; }
+        button:hover { background-color:#444; }
+        .home-btn { display:inline-block; margin-top:15px; padding:10px 20px; background:#333; color:white; text-decoration:none; border-radius:6px; }
+        .home-btn:hover { background:#555; }
+    </style>
+</head>
+<body>
+<marquee> Join Skin Glow – Shine Bright Every Day! </marquee>
+
+<div class="form-wrapper">
+    <h2>Register</h2>
+    <form id="registerForm" action ="validate.php">
+        <label>Name:</label>
+        <input type="text" id="name" name="name">
+
+        <label>Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label>Password:</label>
+        <input type="password" id="password" name="password">
+
+        <label>Phone:</label>
+        <input type="text" id="phone" name="phone">
+
+        <button type="submit">Register</button>
+    </form>
+
+    <a href="index.jsp" class="home-btn">⬅ Back to Home</a>
+</div>
+
+<script>
+    // ✅ Client-side validation
+    function validate() {
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var password = document.getElementById("password").value.trim();
+        var phone = document.getElementById("phone").value.trim();
+
+        if(name === "") { alert("Name should not be empty"); return false; }
+        if(email === "") { alert("Email should not be empty"); return false; }
+        if(password === "") { alert("Password should not be empty"); return false; }
+        if(phone === "" || isNaN(phone)) { alert("Enter a valid phone number"); return false; }
+
+        return true;
+    }
+
+    // ✅ AJAX form submit
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        console.log("Submitting form..."); // 👈 Add this test log
+
+        if(!validate()) return;
+
+        const formData = new URLSearchParams();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("email", document.getElementById("email").value);
+        formData.append("password", document.getElementById("password").value);
+        formData.append("phone", document.getElementById("phone").value);
+
+        fetch("RegisterServlet", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData.toString()
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("Server response:", data);
+            alert(data);
+            
+        })
+        .catch(err => alert("Error: " + err));
+    });
+</script>
+</body>
+</html>

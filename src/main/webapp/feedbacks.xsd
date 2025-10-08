@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="feedbacks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="feedback" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:int"/>
+              <xs:element name="username" type="xs:string"/>
+              <xs:element name="rating" type="xs:int"/>
+              <xs:element name="comment" type="xs:string"/>
+              <xs:element name="date" type="xs:date"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

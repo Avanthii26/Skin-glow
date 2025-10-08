@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feedbacks>
+    <feedback>
+        <id>1</id>
+        <username>John</username>
+        <rating>5</rating>
+        <comment>Great service!</comment>
+        <date>2025-09-09</date>
+    </feedback>
+    <feedback>
+        <id>2</id>
+        <username>Jane</username>
+        <rating>2</rating>
+        <comment>Could be better</comment>
+        <date>2025-09-08</date>
+    </feedback>
+</feedbacks>
